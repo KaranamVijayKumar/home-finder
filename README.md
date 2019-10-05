@@ -20,6 +20,8 @@ Finding a home whenever you move to a new place is really hectic task. We need t
 
 ### Activities that will be created: -
 - A login screen for the users.
+- A Customer SignUp screen.
+- A Seller SignUp screen.
 - A screen for selecting the filters of desired home.
 - A screen showing the filtered result.
 - A screen for contacting the owner of home.
