@@ -2,6 +2,7 @@
 This repo is created for doing Android group project. Our App is Home Finder.
 
 ## Links
+- [Project Proposal Document](https://github.com/KaranamVijayKumar/home-finder/blob/master/Project_Proposal_Android.docx)
 - [Demo](https://karanamvijaykumar.github.io/home-finder/)
 - [Source](https://github.com/KaranamVijayKumar/home-finder)
 
