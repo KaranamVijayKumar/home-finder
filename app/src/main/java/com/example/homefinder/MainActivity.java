@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Filter;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,8 +20,15 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, FilterActivity.class);
-                startActivity(intent);
+                EditText ed1 = findViewById(R.id.etUserName);
+                EditText ed2 = findViewById(R.id.etPWD);
+                if (ed1.getText().toString().equals("admin") &&
+                        ed2.getText().toString().equals("admin")) {
+                    Intent intent = new Intent(MainActivity.this, FilterActivity.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         Button btnUserSignUp = findViewById(R.id.btnUserSignUp);
