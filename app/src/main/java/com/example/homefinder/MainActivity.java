@@ -20,10 +20,10 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText ed1 = findViewById(R.id.etUserName);
-                EditText ed2 = findViewById(R.id.etPWD);
-                if (ed1.getText().toString().equals("admin") &&
-                        ed2.getText().toString().equals("admin")) {
+                EditText etUserName = findViewById(R.id.etUserName);
+                EditText etPWD = findViewById(R.id.etPWD);
+                if (etUserName.getText().toString().equals("admin") &&
+                        etPWD.getText().toString().equals("admin")) {
                     Intent intent = new Intent(MainActivity.this, FilterActivity.class);
                     startActivity(intent);
                 }else {
