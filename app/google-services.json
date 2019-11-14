@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "526174995792",
-    "firebase_url": "https://home-finder-47564.firebaseio.com",
-    "project_id": "home-finder-47564",
-    "storage_bucket": "home-finder-47564.appspot.com"
+    "project_number": "363428090537",
+    "firebase_url": "https://home-finder-57157.firebaseio.com",
+    "project_id": "home-finder-57157",
+    "storage_bucket": "home-finder-57157.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:526174995792:android:87fb71fff46b8e7264d855",
+        "mobilesdk_app_id": "1:363428090537:android:4fbc5771f4f39e2d1b0fb8",
         "android_client_info": {
           "package_name": "com.example.homefinder"
         }
       },
       "oauth_client": [
         {
-          "client_id": "526174995792-h6jmcths85js3l3a0v8oa5o48hnt0brt.apps.googleusercontent.com",
+          "client_id": "363428090537-u2b06d21rk6lpt7jskkq6la7ksh1oo32.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.homefinder",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "526174995792-tmi2o8b6ibqe7vqe1uhnagv7fkvoudvn.apps.googleusercontent.com",
+          "client_id": "363428090537-3j0o6jqsptevjitmrjp50jqdnks054b2.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAx-_eZxoclotB6NeXBWpogCmzVlq3tBXA"
+          "current_key": "AIzaSyDCbfCUPmLqgnSuacvWFt4d2YccHyIM-CE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "526174995792-tmi2o8b6ibqe7vqe1uhnagv7fkvoudvn.apps.googleusercontent.com",
+              "client_id": "363428090537-3j0o6jqsptevjitmrjp50jqdnks054b2.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
