@@ -6,7 +6,7 @@ This repo is created for doing Android group project. Our App is Home Finder.
 - [Demo](https://karanamvijaykumar.github.io/home-finder/)
 - [Source](https://github.com/KaranamVijayKumar/home-finder)
 
-## Project Proposal
+## Android Project Proposal Fall 2019 Group 7
 
 ### Name of the App: - Home Finder
 ### Team Members: -
