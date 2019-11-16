@@ -7,7 +7,7 @@
     tools:context=".SellerActivity">
 
     <TextView
-        android:id="@+id/name1"
+        android:id="@+id/TVCusPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="113dp"
@@ -39,7 +39,7 @@
         app:layout_constraintVertical_bias="0.206" />
 
     <EditText
-        android:id="@+id/name3"
+        android:id="@+id/ETCusFN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -67,7 +67,7 @@
         app:layout_constraintVertical_bias="0.306" />
 
     <EditText
-        android:id="@+id/name5"
+        android:id="@+id/ETCusLN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -131,7 +131,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/ETCusEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"

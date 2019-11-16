@@ -73,7 +73,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/ETCusEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="141dp"
@@ -137,7 +137,7 @@
         android:layout_marginBottom="209dp"
         android:text="Email"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editText5"
+        app:layout_constraintEnd_toStartOf="@+id/ETCusEmail"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
