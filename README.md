@@ -39,7 +39,8 @@ Owner upload the pictures of vacant house through his mobile and it will be stor
 
 ![User_Signup](https://github.com/KaranamVijayKumar/home-finder/blob/master/User_SignUp.PNG)
 
+### Filers Page: -
 
-
+![Filters](https://github.com/KaranamVijayKumar/home-finder/blob/master/Filters.PNG)
 
 
