@@ -29,5 +29,10 @@ Finding a home whenever you move to a new place is really hectic task. We need t
 ### Persisted Data: -
 Owner upload the pictures of vacant house through his mobile and it will be stored in a database. Location can be detected through GPS. Using filters such as Location, Price range, number of bedrooms they can find the required apartment.
 
+### Screenshots: -
+
+### Login Screen: -
+
+
 
 
