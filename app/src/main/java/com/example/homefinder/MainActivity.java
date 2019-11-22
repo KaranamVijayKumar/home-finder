@@ -50,10 +50,31 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // loginUser();
+                //loginUser();
             }
 
         });
 
+        Button btnUserSignUp = findViewById(R.id.btnUserSignUp);
+        btnUserSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CustomerActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        Button btnSellerSignUp = findViewById(R.id.btnSellerSignUp);
+        btnSellerSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SellerActivity.class);
+                startActivity(intent);
+
+            }
+        });
     }
+
+
 }
