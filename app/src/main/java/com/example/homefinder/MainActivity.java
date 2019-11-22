@@ -96,5 +96,55 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("", "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Toast.makeText(MainActivity.this, "Authentication success.",
+                                    Toast.LENGTH_SHORT).show();
+
+
+                            DocumentReference docRef = db.collection("users").document(email);
+                            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        if (document.exists()) {
+                                            if (document.get("role").equals("CUSTOMER")) {
+
+                                                //customer intent
+                                                Intent cus = new Intent(MainActivity.this, FilterActivity.class);
+                                                startActivity(cus);
+                                            } else {
+                                                //seller intent
+                                                Toast.makeText(MainActivity.this, "Seller", Toast.LENGTH_SHORT).show();
+                                            }
+                                            Log.d("", "DocumentSnapshot data: " + document.getData());
+                                        } else {
+                                            Log.d("", "No such document");
+                                        }
+                                    } else {
+                                        Log.d("", "get failed with ", task.getException());
+                                    }
+                                }
+                            });
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("", "signInWithEmail:failure", task.getException());
+                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+
+                    }
+                });
+
+
     }
 }
