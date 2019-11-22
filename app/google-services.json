@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "363428090537-dua7n8at32nggbk7cl808erci4g9fm88.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.homefinder",
+            "certificate_hash": "0880e2058e297155897e8d0a04db79d03b362a87"
+          }
+        },
+        {
           "client_id": "363428090537-u2b06d21rk6lpt7jskkq6la7ksh1oo32.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
