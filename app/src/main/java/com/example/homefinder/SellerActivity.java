@@ -51,7 +51,33 @@ public class SellerActivity extends AppCompatActivity {
                         .addOnCompleteListener(SellerActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                      
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+
+                                    // Create a new user with a first and last name
+                                    Map<String, Object> user = new HashMap<>();
+                                    user.put("name", fn+" "+ln);
+                                    user.put("email", email);
+                                    user.put("role",role);
+                                    db.collection("users").document(email)
+                                            .set(user)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Log.d("", "DocumentSnapshot successfully written!");
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.w("", "Error writing document", e);
+                                                }
+                                            });
+
+                                } else {
+
+                                    Toast.makeText(getApplicationContext(), "Authentication Failed", Toast.LENGTH_SHORT).show();
+                                }
 
                             }
                         });
