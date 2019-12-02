@@ -25,5 +25,12 @@ public class SellerActivity extends AppCompatActivity {
         final EditText ETsellLN = findViewById(R.id.ETSellLN);
         final EditText ETsellEmail = findViewById(R.id.ETSellEmail);
         final EditText ETsellPass = findViewById(R.id.ETSellPass);
+        firebaseAuth = FirebaseAuth.getInstance();
+        btnSellerSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 }
