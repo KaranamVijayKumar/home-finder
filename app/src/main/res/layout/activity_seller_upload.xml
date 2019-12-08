@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#3E00BCD4"
     tools:context=".SellerUpload">
 
     <TextView
@@ -16,7 +17,7 @@
         android:layout_marginEnd="188dp"
         android:layout_marginRight="188dp"
         android:layout_marginBottom="595dp"
-        android:text="Filters"
+        android:text="Upload Homes"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,7 +53,7 @@
         android:layout_marginEnd="265dp"
         android:layout_marginRight="265dp"
         android:layout_marginBottom="422dp"
-        android:text="PriceRange"
+        android:text="Home Price"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
