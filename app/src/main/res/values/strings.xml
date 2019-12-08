@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Home Finder</string>
+    <string-array name="cities">
+        <item>Chicago</item>
+        <item>Los Angeles</item>
+        <item>Las Vegas</item>
+        <item>Dallas</item>
+        <item>Miami</item>
+        <item>New York</item>
+        <item>Kansas City</item>
+        <item>Atlanta</item>
+    </string-array>
+
 </resources>
