@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(MainActivity.this, "Authentication success.",
+                            Toast.makeText(MainActivity.this, "Authentication success."+user.getEmail(),
                                     Toast.LENGTH_SHORT).show();
 
 
@@ -122,7 +122,9 @@ public class MainActivity extends AppCompatActivity {
                                                 startActivity(cus);
                                             } else {
                                                 //seller intent
-                                                Toast.makeText(MainActivity.this, "Seller", Toast.LENGTH_SHORT).show();
+                                                Intent sel = new Intent(MainActivity.this, SellerUpload.class);
+                                                startActivity(sel);
+                                               // Toast.makeText(MainActivity.this, "Seller", Toast.LENGTH_SHORT).show();
                                             }
                                             Log.d("", "DocumentSnapshot data: " + document.getData());
                                         } else {
