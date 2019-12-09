@@ -82,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loginUser() {
-        final String email = txtEmail.getText().toString();
-        String password = txtPassword.getText().toString();
+        final String email = "def@gmail.com"; //txtEmail.getText().toString();
+        String password = "12345678"; //txtPassword.getText().toString();
 
 
         if (TextUtils.isEmpty(email)) {
@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(getApplicationContext(), "Please enter Password", Toast.LENGTH_SHORT).show();
             return;
-
         }
 
         mAuth.signInWithEmailAndPassword(email, password)
