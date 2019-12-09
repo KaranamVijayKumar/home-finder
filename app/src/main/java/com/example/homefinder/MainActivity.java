@@ -82,9 +82,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loginUser() {
-        final String email = "def@gmail.com"; //txtEmail.getText().toString();
-        String password = "12345678"; //txtPassword.getText().toString();
-
+        final String email = txtEmail.getText().toString();
+        String password = txtPassword.getText().toString();
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Please enter Email", Toast.LENGTH_SHORT).show();
@@ -105,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(MainActivity.this, "Authentication success."+user.getEmail(),
                                     Toast.LENGTH_SHORT).show();
-
 
                             DocumentReference docRef = db.collection("users").document(email);
                             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -142,10 +140,7 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
-
                     }
                 });
-
-
     }
 }
