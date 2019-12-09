@@ -2,21 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/bedroomsValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="0" />
-
-    <TextView
-        android:id="@+id/valueTV"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Bedrooms" />
+        android:text="Bedrooms: " />
 
     <TextView
         android:id="@+id/priceTV"
@@ -31,5 +24,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="Owner: " />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="dial"
+        android:text="Contact" />
 
 </LinearLayout>
