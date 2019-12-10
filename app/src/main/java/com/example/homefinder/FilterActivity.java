@@ -39,7 +39,24 @@ public class FilterActivity extends AppCompatActivity {
         final String[][] city = {getResources().getStringArray(R.array.cities)};
 //        final ArrayList<DocumentSnapshot> filtered = new ArrayList<>();
         final ArrayList<Map> docs = new ArrayList<>();
+        final ArrayList<Map> tempdocs = new ArrayList<>();
+
         Button btnFilter = findViewById(R.id.btnFilter);
+        int minPriceVal,maxPriceVal;
+        try {
+            minPriceVal = Integer.parseInt(minPrice.getText().toString());
+        } catch (NumberFormatException e) {
+            minPriceVal = 0;
+        }
+        try{
+            maxPriceVal = Integer.parseInt(maxPrice.getText().toString());
+        } catch (NumberFormatException e) {
+            maxPriceVal = -1;
+        }
+        final String bedroomsString = bedrooms.getText().toString();
+
+        final int finalMinPriceVal = minPriceVal;
+        final int finalMaxPriceVal = maxPriceVal;
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,32 +67,78 @@ public class FilterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
+                                tempdocs.clear();
                                 List<DocumentSnapshot> myListOfDocuments = task.getResult().getDocuments();
                                 for (DocumentSnapshot doc : myListOfDocuments) {
                                     if (doc.get("city").equals(place[0])) {
-                                        try{
-                                            if (Integer.parseInt(doc.get("bedrooms").toString()) == Integer.parseInt(bedrooms.getText().toString())) {
-                                                if (Integer.parseInt(doc.get("price").toString()) <= Integer.parseInt(maxPrice.getText().toString())
-                                                        && Integer.parseInt(doc.get("price").toString()) >= Integer.parseInt(minPrice.getText().toString())) {
-                                                    if (doc.get("Available").toString().equals("True")) {
-                                                        docs.add(doc.getData());
-
-//                                                        filtered.add(doc);
-                                                    }
-                                        }
-
-//                                    Toast.makeText(getApplicationContext(),doc+"",Toast.LENGTH_LONG).show();
-//                                Toast.makeText(getApplicationContext(),"found",Toast.LENGTH_LONG).show();
+                                        if (Integer.parseInt(doc.get("price").toString())>= finalMinPriceVal){
+                                            if (!docs.contains(doc)){
+                                                docs.add(doc.getData());
                                             }
-
                                         }
-                                        catch (Exception e){
-                                            Toast.makeText(getApplicationContext(),"Please choose all filters.",Toast.LENGTH_LONG*4).show();
+//                                        try{
+//                                            if (Integer.parseInt(doc.get("bedrooms").toString()) == Integer.parseInt(bedrooms.getText().toString())) {
+//                                                if (Integer.parseInt(doc.get("price").toString()) <= Integer.parseInt(maxPrice.getText().toString())
+//                                                        && Integer.parseInt(doc.get("price").toString()) >= Integer.parseInt(minPrice.getText().toString())) {
+//                                                    if (doc.get("Available").toString().equals("True")) {
+//                                                        docs.add(doc.getData());
+//
+////                                                        filtered.add(doc);
+//                                                    }
+//                                        }
+//
+////                                    Toast.makeText(getApplicationContext(),doc+"",Toast.LENGTH_LONG).show();
+////                                Toast.makeText(getApplicationContext(),"found",Toast.LENGTH_LONG).show();
+//                                            }
+//
+//                                        }
+//                                        catch (Exception e){
+//                                            Toast.makeText(getApplicationContext(),"Please choose all filters.",Toast.LENGTH_LONG*4).show();
+//
+//                                        }
+                                    }
+                                }
+                                if(bedroomsString.equals("") && finalMaxPriceVal == -1){
+                                    tempdocs.clear();
+                                    for(Map doc:docs){
+                                        if (!tempdocs.contains(doc))
+                                        tempdocs.add(doc);
+                                    }
+                                }
+                                else if(!bedroomsString.equals("") && finalMaxPriceVal != -1){
+                                    tempdocs.clear();
+                                    for(Map doc:docs){
+                                        if (!tempdocs.contains(doc))
 
+                                            if(Integer.parseInt(doc.get("price").toString())<=finalMaxPriceVal){
+                                            if(doc.get("bedrooms").toString().equals(bedroomsString)){
+                                                tempdocs.add(doc);
+                                            }
                                         }
                                     }
                                 }
-                                if (docs.size() == 0){
+                                else if(bedroomsString.equals("") && finalMaxPriceVal != -1){
+                                    tempdocs.clear();
+
+                                    for(Map doc:docs){
+                                        if (!tempdocs.contains(doc))
+
+                                            if(Integer.parseInt(doc.get("price").toString())<=finalMaxPriceVal){
+                                            tempdocs.add(doc);
+                                        }
+                                    }
+                                }
+                                else if(!bedroomsString.equals("") && finalMaxPriceVal == -1){
+                                    tempdocs.clear();
+
+                                    for(Map doc:docs){
+                                        if (!tempdocs.contains(doc))
+                                            if(doc.get("bedrooms").toString().equals(bedroomsString)){
+                                            tempdocs.add(doc);
+                                        }
+                                    }
+                                }
+                                if (tempdocs.size() == 0){
                                     Toast.makeText(getApplicationContext(),"No results found.",Toast.LENGTH_LONG*4).show();
                                 }
                                 else {
@@ -84,9 +147,10 @@ public class FilterActivity extends AppCompatActivity {
                                     intent.putExtra("priceMax",maxPrice.getText().toString());
                                     intent.putExtra("city",place[0]);
                                     intent.putExtra("bedrooms",bedrooms.getText().toString());
-                                    intent.putExtra("docsmap",docs);
+                                    intent.putExtra("docsmap",tempdocs);
 //                                    intent.putExtra("filtered",filtered);
                                     startActivity(intent);
+                                    tempdocs.clear();
                                 }
 
                             }
