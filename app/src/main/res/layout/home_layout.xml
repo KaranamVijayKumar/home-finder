@@ -5,6 +5,12 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/cityFiltered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="City: " />
+    <TextView
         android:id="@+id/bedroomsValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,5 +37,16 @@
         android:layout_height="wrap_content"
         android:onClick="dial"
         android:text="Contact" />
+
+    <Button
+        android:id="@+id/sendreq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Request Owner For Approval" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#c0c0c0"/>
 
 </LinearLayout>
