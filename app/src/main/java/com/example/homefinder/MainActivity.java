@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                                                 startActivity(cus);
                                             } else {
                                                 //seller intent
-                                                Intent sel = new Intent(MainActivity.this, SellerUpload.class);
+                                                Intent sel = new Intent(MainActivity.this, SellerDash.class);
                                                 startActivity(sel);
                                                // Toast.makeText(MainActivity.this, "Seller", Toast.LENGTH_SHORT).show();
                                             }

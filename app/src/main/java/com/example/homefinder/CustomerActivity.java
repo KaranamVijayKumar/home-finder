@@ -33,17 +33,19 @@ public class CustomerActivity extends AppCompatActivity {
         Button btnCustomerSignUp = findViewById(R.id.btnCustomerSignUp);
         final EditText ETcusFN = findViewById(R.id.ETCusFN);
         final EditText ETcusLN = findViewById(R.id.ETCusLN);
+        final EditText ETcusPH = findViewById(R.id.ETCusPH);
         final EditText ETcusEmail = findViewById(R.id.ETCusEmail);
         final EditText ETcusPass = findViewById(R.id.ETCusPass);
         firebaseAuth = FirebaseAuth.getInstance();
         btnCustomerSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String fn,ln,email,pass,role;
+                final String fn,ln,email,pass,role,phone;
                 fn = ETcusFN.getText().toString();
                 ln = ETcusLN.getText().toString();
                 email = ETcusEmail.getText().toString();
                 pass = ETcusPass.getText().toString();
+                phone = ETcusPH.getText().toString();
                 role = "CUSTOMER";
                 firebaseAuth.createUserWithEmailAndPassword(email, pass)
                         .addOnCompleteListener(CustomerActivity.this, new OnCompleteListener<AuthResult>() {
@@ -57,12 +59,15 @@ public class CustomerActivity extends AppCompatActivity {
                                     user.put("name", fn+" "+ln);
                                     user.put("email", email);
                                     user.put("role",role);
+                                    user.put("phone",phone);
                                     db.collection("users").document(email)
                                             .set(user)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
                                                     Log.d("", "DocumentSnapshot successfully written!");
+                                                    Intent intent = new Intent(CustomerActivity.this,MainActivity.class);
+                                                    startActivity(intent);
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {

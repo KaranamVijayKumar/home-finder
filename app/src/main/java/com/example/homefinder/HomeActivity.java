@@ -32,6 +32,18 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    ArrayList<Map> docs;
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        docs.clear();
+        mAdapter.notifyDataSetChanged();
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +53,7 @@ public class HomeActivity extends AppCompatActivity {
         final String priceMax = intent.getStringExtra("priceMax");
         final String bedrooms = intent.getStringExtra("bedrooms");
         final String city = intent.getStringExtra("city");
-        ArrayList<Map> docs = (ArrayList<Map>) intent.getSerializableExtra("docsmap");
+        docs = (ArrayList<Map>) intent.getSerializableExtra("docsmap");
         final int[] count = {0};
 //        final ArrayList<DocumentSnapshot> filtered = new ArrayList<>();
 //        final HashMap<String, Map> docs = new HashMap<>();
@@ -96,6 +108,7 @@ public class HomeActivity extends AppCompatActivity {
         mAdapter = new HomeAdapter(docs);
         recyclerView.setAdapter(mAdapter);
 
+
 //
 //        Button btnHomeOwner = findViewById(R.id.btnHomeOwner);
 //        btnHomeOwner.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +123,6 @@ public class HomeActivity extends AppCompatActivity {
 //            Toast.makeText(getApplicationContext(),"Please choose all filters.",Toast.LENGTH_LONG*4).show();
 //        }
     }
-
 
 }
 

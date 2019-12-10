@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -14,19 +15,24 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
 public class SellerUpload extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    String place = null;
+    String place = null,phone = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,21 @@ public class SellerUpload extends AppCompatActivity {
 //        final String[] place = {""};
         final String[][] city = {getResources().getStringArray(R.array.cities)};
 
+
+        db.collection("users").
+                get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<DocumentSnapshot> myListOfDocuments = task.getResult().getDocuments();
+                    for (DocumentSnapshot doc : myListOfDocuments) {
+                        if(doc.get("email").toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                            phone = doc.get("phone").toString();
+                        }
+                    }
+                }
+            }
+        });
         Spinner cities = findViewById(R.id.spinner);
         cities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -58,7 +79,7 @@ public class SellerUpload extends AppCompatActivity {
 
     }
 
-    public void submit(View v){
+    public void submit(View v) {
         final EditText Price = findViewById(R.id.etSellerPrice);
         final EditText Bed = findViewById(R.id.etSellerBed);
         final RadioButton Yes = findViewById(R.id.radioYes);
@@ -68,11 +89,12 @@ public class SellerUpload extends AppCompatActivity {
         city.put("city", place);
         city.put("owner", FirebaseAuth.getInstance().getCurrentUser().getEmail());
         city.put("price", Price.getText().toString());
-        if(Yes.isChecked()){
-            city.put("Available","True");
-        }
-        else{
-            city.put("Available","False");
+        city.put("phone",phone);
+
+        if (Yes.isChecked()) {
+            city.put("Available", "True");
+        } else {
+            city.put("Available", "False");
         }
 
 
@@ -82,7 +104,9 @@ public class SellerUpload extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("", "DocumentSnapshot successfully written!");
-                        Toast.makeText(getApplicationContext(),"Done uploading",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Done uploading", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(SellerUpload.this,MainActivity.class);
+                        startActivity(intent);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

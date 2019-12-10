@@ -36,15 +36,18 @@ public class SellerActivity extends AppCompatActivity {
         final EditText ETsellLN = findViewById(R.id.ETSellLN);
         final EditText ETsellEmail = findViewById(R.id.ETSellEmail);
         final EditText ETsellPass = findViewById(R.id.ETSellPass);
+        final EditText ETsellPhone = findViewById(R.id.etPhoneNumber);
+
         firebaseAuth = FirebaseAuth.getInstance();
         btnSellerSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String fn,ln,email,pass,role;
+                final String fn,ln,email,pass,role,phone;
                 fn = ETsellFN.getText().toString();
                 ln = ETsellLN.getText().toString();
                 email = ETsellEmail.getText().toString();
                 pass = ETsellPass.getText().toString();
+                phone = ETsellPhone.getText().toString();
                 role = "SELLER";
 
                 firebaseAuth.createUserWithEmailAndPassword(email, pass)
@@ -59,12 +62,17 @@ public class SellerActivity extends AppCompatActivity {
                                     user.put("name", fn+" "+ln);
                                     user.put("email", email);
                                     user.put("role",role);
+                                    user.put("phone",phone);
+
                                     db.collection("users").document(email)
                                             .set(user)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
                                                     Log.d("", "DocumentSnapshot successfully written!");
+                                                    Intent intent = new Intent(SellerActivity.this,MainActivity.class);
+                                                    intent.putExtra("phone",phone);
+                                                    startActivity(intent);
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
