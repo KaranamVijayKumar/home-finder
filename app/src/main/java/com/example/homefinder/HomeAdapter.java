@@ -13,16 +13,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private ArrayList<Map> values;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth mAuth;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -32,7 +45,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         public TextView bedroomsTV;
         public TextView priceTV;
         public TextView ownerTV;
-        public Button button;
+        public TextView cityTV;
+
+        public Button button, sendreq;
 
         public View layout;
 
@@ -43,7 +58,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             priceTV = v.findViewById(R.id.priceTV);
             ownerTV = v.findViewById(R.id.ownerTV);
             button = v.findViewById(R.id.button);
-
+            sendreq = v.findViewById(R.id.sendreq);
+            cityTV = v.findViewById(R.id.cityFiltered);
         }
     }
 
@@ -88,6 +104,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 //                remove(position);
 //            }
 //        });
+        holder.cityTV.setText("City: " + doc.get("city").toString());
 
         holder.priceTV.setText("Price: $" + doc.get("price").toString());
         holder.ownerTV.setText("Owner: " + doc.get("owner").toString());
@@ -95,9 +112,60 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             @SuppressLint("MissingPermission")
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + doc.get("Phone").toString()));
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + doc.get("phone").toString()));
                 v.getContext().startActivity(intent);
             }
+        });
+        holder.sendreq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+
+                mAuth = FirebaseAuth.getInstance();
+                final String[] username = new String[1];
+                final String[] phone = new String[1];
+                db.collection("users").
+                        get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<DocumentSnapshot> myListOfDocuments = task.getResult().getDocuments();
+                            for (DocumentSnapshot daku : myListOfDocuments) {
+                                if (daku.get("email").toString().equals(mAuth.getCurrentUser().getEmail())) {
+                                    username[0] = daku.get("name").toString();
+                                    phone[0] = daku.get("phone").toString();
+                                }
+                            }
+
+
+                            Map<String, Object> request = new HashMap<>();
+                            request.put("city", doc.get("city").toString());
+                            request.put("username", username[0]);
+                            request.put("phone", phone[0]);
+                            request.put("owner", doc.get("owner").toString());
+
+                            db.collection("requests").document()
+                                    .set(request)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d("", "DocumentSnapshot successfully written!");
+                                            Toast.makeText(v.getContext(), "Request sent to owner.", Toast.LENGTH_LONG * 3).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w("", "Error writing document", e);
+                                        }
+                                    });
+
+
+                        }
+                    }
+                });
+
+            }
+
         });
         Log.d("TAG", "Done");
 
