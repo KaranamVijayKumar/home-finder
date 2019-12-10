@@ -191,6 +191,7 @@
         android:layout_marginRight="27dp"
         android:layout_marginBottom="337dp"
         android:ems="10"
+        android:hint="enter no. of beds"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
